@@ -1,13 +1,18 @@
 package com.capgemini.cabinvoicegenerator;
 
-import java.util.logging.Logger;
-
 public class CabInvoiceGenerator {
 
-	public static void main(String[] args) {
-		Logger log = Logger.getLogger(CabInvoiceGenerator.class.getName());
+	// Constant value for cost
+	private static final double COST_PER_KM = 10;
+	private static final double COST_PER_MINUTE = 1;
+	private static final double MINIMUM_FARE = 5;
 
-		// Welcome message added
-		log.info("Welcome to Cab Invoice Generator!");
+	// Returning total fare
+	public double calculateTotalFare(double distance, double time) {
+		 double totalFare = distance * COST_PER_KM + time * COST_PER_MINUTE;
+		 if (totalFare < MINIMUM_FARE) {
+			return MINIMUM_FARE;
+		}
+		 return totalFare;
 	}
 }
