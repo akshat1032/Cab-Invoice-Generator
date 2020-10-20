@@ -17,10 +17,10 @@ public class TestCabInvoiceGenerator {
 	CabInvoiceGenerator cabInvoiceGenerator = null;
 	
 	@Before
-	public void setUp()throws Exception{
+	public void setUp() throws Exception{
 		cabInvoiceGenerator = new CabInvoiceGenerator();
 	}
-
+	
 	// Test for total fare given distance and time
 	@Test
 	public void givenDistanceAndTimeReturnTotalFare() {
@@ -37,13 +37,15 @@ public class TestCabInvoiceGenerator {
 		log.info("Return minimum fare tested successfully");
 	}
 
-	// Test for invoice summary for multiple rides
+	// Test for invoice summary for multiple rides based on userId
 	@Test
 	public void givenMultipleRidesReturnInvoiceSummary() {
+		String userId = "Shino";
 		Rides[] rides = { new Rides(2.0, 20.0), new Rides(0.2, 2.0) };
+		CabInvoiceGenerator cabInvoiceGeneratorParam = new CabInvoiceGenerator(userId, rides);
 		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 45);
-		InvoiceSummary actualInvoiceSummary = cabInvoiceGenerator.calculateTotalFare(rides);
+		InvoiceSummary actualInvoiceSummary = cabInvoiceGeneratorParam.calculateTotalFare(userId);
 		Assert.assertEquals(expectedInvoiceSummary, actualInvoiceSummary);
-		log.info("Return invoice summary tested successfully");
+		log.info("Return invoice summary for userId tested successfully");
 	}
 }
